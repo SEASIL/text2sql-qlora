@@ -96,7 +96,7 @@ depend on it for the live demo.
 ## Results (fill in with MEASURED numbers only)
 | Model | Execution accuracy (Spider dev) | Valid-SQL rate | Notes |
 |---|---|---|---|
-| Qwen2.5-1.5B-Instruct (base) | TBD | TBD | |
+| Qwen2.5-1.5B-Instruct (base) | 45.65% (472/1034) | 71.66% (741/1034) | 4-bit NF4, commit `ac7acb2` |
 | + QLoRA fine-tune | TBD | TBD | |
 | Hosted API baseline (optional) | TBD | TBD | |
 
