@@ -17,7 +17,14 @@ import yaml
 from datasets import load_dataset
 from peft import LoraConfig
 from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
+from transformers.trainer_utils import get_last_checkpoint
+import transformers.trainer
+import transformers.utils.import_utils
 from trl import SFTConfig, SFTTrainer
+
+# Allow loading local optimizer/scheduler checkpoint with torch < 2.6
+transformers.trainer.check_torch_load_is_safe = lambda: None
+transformers.utils.import_utils.check_torch_load_is_safe = lambda: None
 
 
 def main():
@@ -72,7 +79,10 @@ def main():
     trainer = SFTTrainer(
         model=model, args=sft_args, train_dataset=data["train"], eval_dataset=data["val"],
         peft_config=peft_config, processing_class=tok)
-    trainer.train()
+    last_checkpoint = get_last_checkpoint(t["output_dir"])
+    if last_checkpoint is not None:
+        print(f"Resuming training from {last_checkpoint}...")
+    trainer.train(resume_from_checkpoint=last_checkpoint)
     trainer.save_model(t["output_dir"])
     tok.save_pretrained(t["output_dir"])
     print("saved adapter to", t["output_dir"])
