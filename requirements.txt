@@ -1,0 +1,14 @@
+# Install PyTorch separately first, matching your CUDA version:
+#   https://pytorch.org/get-started/locally/
+# Then: pip install -r requirements.txt
+# After the first successful run, pin exact versions with `pip freeze` for reproducibility.
+transformers>=4.46
+datasets
+peft
+trl
+accelerate
+bitsandbytes
+mlflow
+pyyaml
+pytest
+tqdm

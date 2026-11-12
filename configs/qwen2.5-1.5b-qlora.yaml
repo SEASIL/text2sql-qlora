@@ -1,0 +1,37 @@
+# QLoRA config sized for an 8GB GPU (RTX 4060). Adjust batch size / max_length if you hit OOM.
+base_model: Qwen/Qwen2.5-1.5B-Instruct
+seed: 42
+
+data:
+  train_file: data/processed/train.jsonl
+  val_file: data/processed/val.jsonl
+
+quantization:
+  load_in_4bit: true
+  bnb_4bit_quant_type: nf4
+  bnb_4bit_use_double_quant: true
+  compute_dtype: bfloat16
+
+lora:
+  r: 16
+  alpha: 32
+  dropout: 0.05
+  target_modules: [q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj]
+
+training:
+  output_dir: outputs/qwen2.5-1.5b-text2sql-lora
+  run_name: qwen2.5-1.5b-qlora-v1
+  num_train_epochs: 1
+  per_device_train_batch_size: 4
+  per_device_eval_batch_size: 4
+  gradient_accumulation_steps: 4
+  learning_rate: 2.0e-4
+  lr_scheduler_type: cosine
+  warmup_ratio: 0.03
+  max_length: 512
+  logging_steps: 10
+  eval_steps: 200
+  save_steps: 200
+  save_total_limit: 2
+  optim: paged_adamw_8bit
+  report_to: mlflow

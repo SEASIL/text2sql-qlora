@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+mlruns/
+data/*
+!data/.gitkeep
+outputs/*
+!outputs/.gitkeep
+*.gguf
+*.safetensors
+*.bin
+checkpoints/
+.env
