@@ -97,7 +97,7 @@ depend on it for the live demo.
 | Model | Execution accuracy (Spider dev) | Valid-SQL rate | Notes |
 |---|---|---|---|
 | Qwen2.5-1.5B-Instruct (base) | 45.65% (472/1034) | 71.66% (741/1034) | 4-bit NF4, commit `ac7acb2` |
-| + QLoRA fine-tune | TBD | TBD | |
+| + QLoRA fine-tune | 15.76% (163/1034) | 49.71% (514/1034) | 4-bit NF4 + LoRA r=16, commit `7f44940` (cross-dataset degradation; see Error Analysis) |
 | Hosted API baseline (optional) | TBD | TBD | |
 
 ## Known limitations (keep this section honest)
