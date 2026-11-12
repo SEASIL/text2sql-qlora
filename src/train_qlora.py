@@ -7,6 +7,10 @@ max_seq_length, processing_class vs tokenizer). If a call below errors, check th
 installed version's docs and adapt, then pin versions in requirements.txt.
 """
 import argparse
+import os
+
+os.environ.setdefault("MLFLOW_ALLOW_FILE_STORE", "true")
+os.environ.setdefault("MLFLOW_TRACKING_URI", "./mlruns")
 
 import torch
 import yaml
