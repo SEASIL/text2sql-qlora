@@ -235,3 +235,4 @@ Across the 871 failed queries in `eval_finetuned.jsonl`:
    Eliminate arbitrary positional aliases (`T1, T2`) in favor of readable table initials (`s.Name`, `c.Year`) or unaliased column references when columns are unique across joined tables.
 3. **Execution-Guided Fallback / Self-Correction:**
    Because the execution harness produces instant feedback, passing SQLite error messages back to the model in a 2-turn correction loop can resolve virtually all 414 alias misattributions and syntax errors.
+
