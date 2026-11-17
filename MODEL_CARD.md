@@ -80,3 +80,4 @@ print(tokenizer.decode(outputs[0][inputs["input_ids"].shape[1]:], skip_special_t
 # Run locally with pure CPU on any computer (sub-1GB memory footprint)
 ./llama-cli -m model-Q4_K_M.gguf -p "Schema:\nCREATE TABLE employees (id INT, name TEXT, department TEXT, salary INT);\n\nQuestion: Who earns the highest salary in Engineering?" -n 64
 ```
+
