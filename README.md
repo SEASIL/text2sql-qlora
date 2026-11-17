@@ -88,10 +88,11 @@ python scripts/merge_adapter.py --adapter outputs/qwen2.5-1.5b-text2sql-lora --o
 python convert_hf_to_gguf.py outputs/merged-fp16 --outfile outputs/model-f16.gguf
 ./llama-quantize outputs/model-f16.gguf outputs/model-Q4_K_M.gguf Q4_K_M
 ```
-Upload the adapter and GGUF to the Hugging Face Hub (public repos are free), then link a
-Google Colab notebook and a short recorded demo from this README.
-Note: Hugging Face Spaces now requires a paid plan for Gradio/Docker apps, so do not
-depend on it for the live demo.
+## Free Public Hosting & Demo
+
+- **Hugging Face Hub Repository:** [GPTpasta/qwen2.5-1.5b-text2sql-lora](https://huggingface.co/GPTpasta/qwen2.5-1.5b-text2sql-lora) (contains the LoRA adapter safetensors and the quantized `model-Q4_K_M.gguf` file).
+- **Interactive Google Colab Notebook:** [`notebooks/demo.ipynb`](notebooks/demo.ipynb) (runs in free-tier Colab with T4 GPU or CPU).
+- **In-Depth Error Analysis:** [`docs/error_analysis.md`](docs/error_analysis.md) (comprehensive taxonomy and failure case studies).
 
 ## Results (fill in with MEASURED numbers only)
 | Model | Execution accuracy (Spider dev) | Valid-SQL rate | Notes |
