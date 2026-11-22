@@ -89,6 +89,10 @@ streamlit run app.py
 The fine-tuned LoRA weights and GGUF quantized binaries are publicly hosted at:  
 👉 **[huggingface.co/GPTpasta/qwen2.5-1.5b-text2sql-lora](https://huggingface.co/GPTpasta/qwen2.5-1.5b-text2sql-lora)**
 
+### 4. Technical Metrics PDF Report
+Download the complete 3-page audited engineering report:  
+📄 **[`docs/Text2SQL_QLoRA_Metrics_Report.pdf`](docs/Text2SQL_QLoRA_Metrics_Report.pdf)**
+
 ---
 
 ## 📊 Measured Benchmark Results (Spider Dev Set)
