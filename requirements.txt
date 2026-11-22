@@ -12,3 +12,8 @@ mlflow
 pyyaml
 pytest
 tqdm
+sqlglot
+pandas
+streamlit
+huggingface_hub
+gguf
