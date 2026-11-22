@@ -1,18 +1,17 @@
 # Text-to-SQL with QLoRA
 
-Fine-tune a small open LLM (Qwen2.5-1.5B-Instruct) to turn English questions into SQL,
-measure it honestly against the untuned base model, and ship it so anyone can try it.
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/SEASIL/text2sql-qlora/blob/main/notebooks/demo.ipynb)
+[![Hugging Face Model](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-GPTpasta%2Fqwen2.5--1.5b--text2sql--lora-blue)](https://huggingface.co/GPTpasta/qwen2.5-1.5b-text2sql-lora)
+[![CI](https://github.com/SEASIL/text2sql-qlora/actions/workflows/ci.yml/badge.svg)](https://github.com/SEASIL/text2sql-qlora/actions/workflows/ci.yml)
 
-> **Status: base scaffold.** Code is written but training/eval have not been run yet.
-> The results table below is intentionally empty. Fill it only with numbers you measured.
+Fine-tune a small open LLM (`Qwen/Qwen2.5-1.5B-Instruct`) to turn English questions into SQL,
+measure it honestly against the untuned base model, and ship it with end-to-end evaluation, guardrails, and CPU quantization.
 
 ## What this project proves
-- **Fine-tuning:** QLoRA (4-bit base + LoRA adapters) trained on a single 8GB GPU.
-- **Evaluation:** execution accuracy on Spider dev (run the SQL, compare result sets),
-  not just string matching. Base vs fine-tuned, same prompt, same settings.
-- **Safety:** every generated query passes a read-only SQL guard and runs on a
-  read-only database connection.
-- **Shipping:** merged + quantized GGUF, model on Hugging Face Hub, Colab demo, CI.
+- **Fine-tuning:** QLoRA (4-bit base + LoRA adapters) trained on a single 8GB RTX 4060 GPU (peak VRAM: 3.1 GB).
+- **Evaluation:** Execution accuracy on Spider dev (run the SQL, compare result sets), not just string matching.
+- **Safety:** Every generated query passes an AST-based SQL guard and executes on a read-only SQLite connection.
+- **Shipping:** Merged + quantized GGUF (`Q4_K_M`, 934 MB), Hugging Face Hub release, Google Colab demo, Streamlit web app, and GitHub Actions CI.
 
 ## How it works
 ```
@@ -73,9 +72,13 @@ python -m src.train_qlora --config configs/qwen2.5-1.5b-qlora.yaml
 python -m src.evaluate --label finetuned --spider-dir data/spider \
     --adapter outputs/qwen2.5-1.5b-text2sql-lora
 
-# 6. Try it
+# 6. Try it (CLI or Web UI)
+# CLI query:
 python -m src.infer --db data/spider/database/concert_singer/concert_singer.sqlite \
     --adapter outputs/qwen2.5-1.5b-text2sql-lora --question "How many singers are there?"
+
+# Interactive Streamlit Web App:
+streamlit run app.py
 
 # MLflow UI for training curves
 mlflow ui
